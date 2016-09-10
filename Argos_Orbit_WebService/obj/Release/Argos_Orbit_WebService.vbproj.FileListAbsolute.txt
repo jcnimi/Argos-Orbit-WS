@@ -1,0 +1,9 @@
+I:\Nimi\Developpement\Argos_Orbit_WebService\Argos_Orbit_WebService\bin\Argos_Orbit_WebService.dll
+I:\Nimi\Developpement\Argos_Orbit_WebService\Argos_Orbit_WebService\bin\Argos_Orbit_WebService.pdb
+I:\Nimi\Developpement\Argos_Orbit_WebService\Argos_Orbit_WebService\bin\Argos_Orbit_WebService.xml
+I:\Nimi\Developpement\Argos_Orbit_WebService\Argos_Orbit_WebService\obj\Release\ResolveAssemblyReference.cache
+I:\Nimi\Developpement\Argos_Orbit_WebService\Argos_Orbit_WebService\obj\Release\Argos_Orbit_WebService.Resources.resources
+I:\Nimi\Developpement\Argos_Orbit_WebService\Argos_Orbit_WebService\obj\Release\Argos_Orbit_WebService.vbproj.GenerateResource.Cache
+I:\Nimi\Developpement\Argos_Orbit_WebService\Argos_Orbit_WebService\obj\Release\Argos_Orbit_WebService.dll
+I:\Nimi\Developpement\Argos_Orbit_WebService\Argos_Orbit_WebService\obj\Release\Argos_Orbit_WebService.xml
+I:\Nimi\Developpement\Argos_Orbit_WebService\Argos_Orbit_WebService\obj\Release\Argos_Orbit_WebService.pdb
