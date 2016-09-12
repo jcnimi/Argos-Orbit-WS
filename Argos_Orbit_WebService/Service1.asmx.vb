@@ -50,10 +50,51 @@ Public Class Service1
         Public previousLoanAmount As Decimal  'added for the new argos
     End Structure
     '
+    Public Structure Acct_Loan
+        Public Account_number As String
+        Public LoanId As String
+    End Structure
     '
     'Functions
     '
     '
+    <WebMethod(Description:="Display Client informations"), SoapHeader("User")> _
+    Public Function GetLoanIDByGroupLoanNumber(ByVal groupLoanNumber As String) As Acct_Loan()
+        Dim errorMsg As String = "No error"
+        Dim resStr As String = "Sucess with Group Loan Number " & groupLoanNumber
+
+        Dim cust As Acct_Loan()
+        connStr = My.Settings.DBConnectionString
+        If CheckUserPwd(User) = False Then
+            resStr = "Failure with user or pwd invalid"
+            errorMsg = "No exeption"
+            WriteToLog("GetLoanIDByGroupLoanNumber", resStr, errorMsg)
+            Return Nothing
+        End If
+        Try
+            queryString = "select disb_acct_no as account_number,acct_no as loan_id " & _
+            " from ln_grp_loan_members where grp_loan_no = '" & groupLoanNumber & "'"
+            conn = New OdbcConnection(connStr)
+            conn.Open()
+            cmd = New OdbcCommand(queryString, conn)
+            reader = cmd.ExecuteReader
+            Dim i As Integer = 1
+            While reader.Read()
+                ReDim Preserve cust(i)
+                cust(i - 1).Account_number = reader("account_number").ToString()
+                cust(i - 1).LoanId = reader("loan_id").ToString()
+                i += 1
+            End While
+            WriteToLog("GetLoanIDByGroupLoanNumber", "Success with Group Loan Number " & groupLoanNumber, "No Error")
+        Catch ex As Exception
+            'do nothing
+            resStr = "Failure with exception"
+            errorMsg = ex.Message
+            WriteToLog("GetLoanIDByGroupLoanNumber", resStr, errorMsg)
+        End Try
+        Return cust
+    End Function
+
     <WebMethod(Description:="Display Client informations"), SoapHeader("User")> _
     Public Function GetCustomerDetails(ByVal acct_no As String) As customerDetails
 
