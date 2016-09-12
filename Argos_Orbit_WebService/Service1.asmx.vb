@@ -55,10 +55,59 @@ Public Class Service1
         Public LoanId As String
     End Structure
     '
+    Public Structure LoanData
+        Public LoanId As String
+        Public AmountFinanced As Decimal
+        Public CurrentBalance As Decimal
+        Public Status As String
+        Public PaidBack As Decimal
+        Public NumberOfDayDelinquent As Integer
+    End Structure
+    '
     'Functions
     '
+    <WebMethod(Description:="Get Loan details by loan ID"), SoapHeader("User")> _
+    Public Function GetLoanDataByLoanId(ByVal loanId As String) As LoanData
+        Dim errorMsg As String = "No error"
+        Dim resStr As String = "Sucess with Loan Id" & loanId
+        '
+        Dim cust As LoanData = Nothing
+        connStr = My.Settings.DBConnectionString
+        If CheckUserPwd(User) = False Then
+            resStr = "Failure with user or pwd invalid"
+            errorMsg = "No exeption"
+            WriteToLog("GetLoanDataByLoanId", resStr, errorMsg)
+            Return Nothing
+        End If
+        Try
+            queryString = "select a.acct_no as LoanId, a.amt as AmountFinanced, a.cur_bal as Current_Balance, a.status," & _
+                        " (select sum(amt) from ln_history where acct_no = a.acct_no  and tran_code in (300,345)) as Paidback, " & _
+                        " datediff(day,isnull(a.delq_dt,getdate()),getdate()) as numberOfDayDeliquent " & _
+                        " from ln_display a " & _
+                        " where a.acct_no = '" & loanId & "'"
+            conn = New OdbcConnection(connStr)
+            conn.Open()
+            cmd = New OdbcCommand(queryString, conn)
+            reader = cmd.ExecuteReader
+            Dim i As Integer = 1
+            reader.Read()
+            cust.LoanId = reader("LoanId").ToString
+            cust.AmountFinanced = reader("AmountFinanced").ToString
+            cust.CurrentBalance = reader("Current_Balance").ToString
+            cust.Status = reader("status").ToString
+            cust.PaidBack = reader("Paidback").ToString
+            cust.NumberOfDayDelinquent = reader("numberOfDayDeliquent").ToString
+            WriteToLog("GetLoanDataByLoanId", "Success with Group Loan Number " & loanId, "No Error")
+        Catch ex As Exception
+            'do nothing
+            resStr = "Failure with exception"
+            errorMsg = ex.Message
+            WriteToLog("GetLoanDataByLoanId", resStr, errorMsg)
+        End Try
+        Return cust
+    End Function
     '
-    <WebMethod(Description:="Display Client informations"), SoapHeader("User")> _
+    <WebMethod(Description:="Get loan ID by group loan ID"), SoapHeader("User")> _
     Public Function GetLoanIDByGroupLoanNumber(ByVal groupLoanNumber As String) As Acct_Loan()
         Dim errorMsg As String = "No error"
         Dim resStr As String = "Sucess with Group Loan Number " & groupLoanNumber

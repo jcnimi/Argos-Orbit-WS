@@ -1,8 +1,8 @@
 <publishData>
   <publishTarget publishUrl="C:\Users\jcnimi\Desktop\Argos\">
-    <file relUrl="bin/Argos_Orbit_WebService.xml" publishTime="09/12/2016 15:05:23" />
-    <file relUrl="bin/Argos_Orbit_WebService.dll" publishTime="09/12/2016 15:05:22" />
-    <file relUrl="bin/Argos_Orbit_WebService.pdb" publishTime="09/12/2016 15:05:22" />
+    <file relUrl="bin/Argos_Orbit_WebService.xml" publishTime="09/12/2016 16:56:44" />
+    <file relUrl="bin/Argos_Orbit_WebService.dll" publishTime="09/12/2016 16:56:44" />
+    <file relUrl="bin/Argos_Orbit_WebService.pdb" publishTime="09/12/2016 16:56:44" />
     <file relUrl="Service1.asmx" publishTime="08/21/2015 10:15:18" />
     <file relUrl="readme.txt" publishTime="10/12/2015 09:16:09" />
     <file relUrl="Web.config" publishTime="12/10/2015 14:44:27" />

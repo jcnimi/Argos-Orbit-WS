@@ -1,0 +1,10 @@
+select disb_acct_no as account_number,acct_no as loan_id 
+from ln_grp_loan_members 
+where grp_loan_no = '000-00057010'
+
+
+select a.acct_no as LoanId, a.amt as AmountFinanced, a.cur_bal as Current_Balance, a.status,
+(select sum(amt) from ln_history where acct_no = a.acct_no  and tran_code in (300,345)) as Paidback,
+datediff(day,isnull(a.delq_dt,getdate()),getdate()) as numberOfDayDeliquent
+from ln_display a
+where a.acct_no = '101009031596'
