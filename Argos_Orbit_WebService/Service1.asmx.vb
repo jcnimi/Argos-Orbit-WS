@@ -62,7 +62,7 @@ Public Class Service1
 
         Dim cust As customerDetails = Nothing
         connStr = My.Settings.DBConnectionString
-
+        '
         If CheckUserPwd(User) = False Then
             resStr = "Failure with user or pwd invalid"
             errorMsg = "No exeption"
